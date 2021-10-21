@@ -178,3 +178,31 @@ As expected, the 2nd measure has less random error, at the limit, 0.2%. How in t
 manage on the first day to get 0.1%? because I was nervous because Stefaan was watching me? xD
 In any case, systemaic error to high
 '''
+
+
+#%% 21/10/21, redo of .5mL
+
+'''
+Measurements of .5mL. 2 emasurements. In thef irst one, always I drop the last dropplet, in the 2nd,
+I do sveral mistakes echando el liquido muy rapido, no viendo la goita o succionandola, pq al soltar 
+el final, sorbe un poco.
+        
+'''
+
+m_0_5mL_21_10 = [1.6434, 2.1348, 2.6260, 3.1192, 3.6108, 4.1046, 4.5957, 5.0901, 5.5831, 6.0757,
+                 6.5685, 7.0600, 7.5531, 8.0453, 8.5385, 9.0298, 9.5227, 10.0147, 10.5076, 11.0011, 
+                 11.4921, 11.9845]
+
+res_0_5mL_21_10 = pipetter_tester.Pipetting_tester(.5, m_0_5mL_21_10, bins = 15)
+
+m_0_5mL_21_10_ = [1.6909, 2.1869, 2.6818, 3.1755, 3.6688, 4.1616, 4.6568, 5.1503, 5.6435, 6.1392,
+                  6.6308, 7.1212, 7.6176, 8.1124, 8.6100, 9.1027, 9.5977, 10.0911, 10.5837,
+                  11.0759, 11.5688]
+
+res_0_5mL_21_10_ = pipetter_tester.Pipetting_tester(.5, m_0_5mL_21_10_, bins = 12)
+
+'''
+As expected, the 2nd measure has less random error, at the limit, 0.2%. How in the hell did I
+manage on the first day to get 0.1%? because I was nervous because Stefaan was watching me? xD
+In any case, systemaic error to high
+'''
