@@ -23,6 +23,7 @@ import pipetter_tester  #My function for the tester
 
 #%% 
 
+print('6/10/2021')
 
 '''
 So, in theory, each increment was 1mL = 1g. I do not know the precision of the
@@ -95,6 +96,9 @@ I have seen:
     .beware of touching the wall of the vase, if not, dropplets may stay in the plastic
     thing of the pippete
 """
+
+print('3/10/2021')
+
 m_1mL = [1.4505, 2.4453, 3.4398, 4.4344, 5.4318, 6.4249, 7.4202, 8.4149,
          9.4094, 10.4049, 11.4013, 12.3936, 13.3858, 14.3764, 15.3644,
          16.3556, 17.3484, 18.3399, 19.3322, 20.3270, 21.3185]
@@ -126,6 +130,8 @@ the plastic thing?
 This day I see that if you do it slowly, the ast dropplet fell down better.
 2 measrements, in cronologic order, using the same plastic thing.
 '''
+
+print('4/10/2021')
 
 m_1ml_410 = [1.5894, 2.5801, 3.5753, 4.5646, 5.5611, 6.5557, 7.5492, 8.5435, 9.5379,
              10.5297, 11.5278, 12.5233, 13.5218, 14.5178, 15.5131, 16.5081, 
@@ -161,6 +167,8 @@ again, and sometime I touched my coat :)"
         
 '''
 
+print('19/10/2021')
+
 m_1mL_19_10 = [1.6437, 2.6059, 3.5997, 4.5932, 5.5880, 6.5793, 7.5749, 8.5670, 9.5635, 10.555,
                11.5476, 12.5431, 13.5369, 14.5307, 15.5209, 16.5156, 17.5085, 18.4997, 19.4884,
                20.4816, 21.4741, 22.4700]
@@ -188,6 +196,8 @@ I do sveral mistakes echando el liquido muy rapido, no viendo la goita o succion
 el final, sorbe un poco.
         
 '''
+print('21/10/2021')
+
 
 m_0_5mL_21_10 = [1.6434, 2.1348, 2.6260, 3.1192, 3.6108, 4.1046, 4.5957, 5.0901, 5.5831, 6.0757,
                  6.5685, 7.0600, 7.5531, 8.0453, 8.5385, 9.0298, 9.5227, 10.0147, 10.5076, 11.0011, 
@@ -205,4 +215,34 @@ res_0_5mL_21_10_ = pipetter_tester.Pipetting_tester(.5, m_0_5mL_21_10_, bins = 1
 As expected, the 2nd measure has less random error, at the limit, 0.2%. How in the hell did I
 manage on the first day to get 0.1%? because I was nervous because Stefaan was watching me? xD
 In any case, systemaic error to high
+'''
+
+#%% 26/10/21
+'''
+Meareuement of 1mL again, with Rafa there. He told me:
+        .It is fine to release the content without touching the wall, since touching
+            it could damage the pippete end or contaminatinng it
+        .Slowly release the liquid, to ensure the dropplet drops
+        .Slowly increase, and when finish wait a sec in the liquid, to mitigate the
+          `inercia` of the sucking system
+        .They try to do weight instead of volume since weight is more precise
+          
+En alguna medida, la gota no salio bien, se quedaba pegada a la boquilla. This time, I 
+also changed the methodology; previously after closing the balnce, I selected the printing 
+buttom, so that with the first stable emasurement, the result was printed. Now, as suggested
+by Stefaan, I wait a bit, since could happen that after a 1st stable emasurement, it changes 
+again.
+
+'''
+
+print('26/10/2021')
+
+m_1mL_26_10 = [1.6450, 2.6353, 3.6267, 4.6199, 5.6124, 6.6044, 7.5963, 8.5885, 9.5831,
+               10.5768, 11.5657, 12.5525, 13.5460, 14.5364, 15.5210, 16.5142, 17.5040,
+               18.4898, 19.4722, 20.4607, 21.4544]
+
+res_1mL_26_10 = pipetter_tester.Pipetting_tester(1, m_1mL_26_10, bins = 15)
+
+'''
+Well, again, bad measurement xD. Random error and systematic error higher. 
 '''
