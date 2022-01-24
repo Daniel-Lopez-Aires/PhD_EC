@@ -78,7 +78,7 @@ Turkish = {'name' : "Turkey", '%Mont' : 72.43, 'Delta_%Mont' : 1.39,
          'Geo_H2O' : 9.3, 'Gen_H2O' : 8.5,
          }  #Turkish bentonite. The 200kg version, not small batches.
 
-Wyoming = {'name' : "MX-80", '%Mont' : 85.3, 'Delta_%Mont' : 1.5, 
+Wyoming = {'name' : "Bara-Kade", '%Mont' : 85.3, 'Delta_%Mont' : 1.5, 
          '%Mica' : 4.97, 'Delta_%Mica' : .74, 
          'CEC_total[cmol/kg]' : 84, 'Delta_CEC_total[cmol/kg]' : .6,
          'CEC_clay[cmol/kg]' : 0, 'Delta_CEC_clay[cmol/kg]' : 0,
@@ -278,7 +278,7 @@ X_axis = np.arange(len(names))                 #To do the 2 bar plot
 w = .3          #bar width
 
 plt.figure(figsize=(10,8))  #width, heigh 6.4*4.8 inches by default
-plt.title("C and S content", fontsize=22, wrap=True)           #title
+plt.title("Organic C and S content", fontsize=22, wrap=True)           #title
 plt.bar(X_axis - w, perc_C, yerr = Delta_perc_C, width = 1*w, edgecolor="black", label = '%C', align='center') 
 plt.bar(X_axis , perc_S, yerr = Delta_perc_S, width = 1*w, edgecolor="black", label = '%S', align='center') 
 plt.bar(X_axis + w, perc_S_S2, yerr = Delta_perc_S_S2,  width = 1*w, edgecolor="black", label = '%S/S$^{2-}$', align='center') 
