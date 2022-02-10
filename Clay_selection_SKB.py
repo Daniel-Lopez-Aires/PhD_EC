@@ -47,6 +47,13 @@ Milos = {'name' : "Milos", '%Mont' : 43.6, 'Delta_%Mont' : 1,
          'rho_grain[kg/m3]' :2606, 'Delta_rho_grain[kg/m3]' : 13,
          'rho_min[kg/m3]' : 1440, 'rho_max[kg/m3]': 1530,
          'Geo_H2O' : 17.9, 'Gen_H2O' : 15.1,
+         #
+         'MnO' : .03, 'Delta_MnO' : .02, 'Fe2O3' : 3.04, 'Delta_Fe2O3' : .21,
+         'Na2O' : .36, 'Delta_Na2O' : .04, 'MgO' : 2.56, 'Delta_MgO' : .09,
+         'Al2O3' : 18.35, 'Delta_Al2O3' : .46, 'SiO2' : 67.9, 'Delta_SiO2' : 1.01,         
+         'P2O5' : .01, 'Delta_P2O5' : .0, 'SO3' : 2.5, 'Delta_SO3' : .22,
+         'Cl' : .03, 'Delta_Cl' : .01, 'K2O' : 1.29, 'Delta_K2O' : .15,
+         'CaO' : 3.39, 'Delta_CaO' : 1, 'TiO2' : .56, 'Delta_TiO2' : .06,
          }  #All the data from the Milos bentonite. Note this is low content on
             #purpose. Could find higher content. Delta is the standard deviation
             
@@ -63,6 +70,13 @@ Morocco = {'name' : "Morocco", '%Mont' : 84.8, 'Delta_%Mont' : 1.48,
          'rho_grain[kg/m3]' :2737, 'Delta_rho_grain[kg/m3]' : 16,
          'rho_min[kg/m3]' : 1440, 'rho_max[kg/m3]': 1550,
          'Geo_H2O' : 17.7, 'Gen_H2O' : 15,
+         #Morocco data
+         'MnO' : .01, 'Delta_MnO' : 0, 'Fe2O3' : 2.71, 'Delta_Fe2O3' : .02,
+         'Na2O' : 1.42, 'Delta_Na2O' : .03, 'MgO' : 2.07, 'Delta_MgO' : .01,
+         'Al2O3' : 28.87, 'Delta_Al2O3' : .07, 'SiO2' : 61.82, 'Delta_SiO2' : .05,         
+         'P2O5' : .01, 'Delta_P2O5' : .00, 'SO3' : .07, 'Delta_SO3' : .0,
+         'Cl' : .12, 'Delta_Cl' : .00, 'K2O' : 1.08, 'Delta_K2O' : .02,
+         'CaO' : 1.53, 'Delta_CaO' : .03, 'TiO2' : .31, 'Delta_TiO2' : .0,
          }  #Moroco bentonite. CEC_clay is marked with a * in the report
 
 Turkish = {'name' : "Turkey", '%Mont' : 72.43, 'Delta_%Mont' : 1.39, 
@@ -76,6 +90,20 @@ Turkish = {'name' : "Turkey", '%Mont' : 72.43, 'Delta_%Mont' : 1.39,
          'rho_grain[kg/m3]' :2605, 'Delta_rho_grain[kg/m3]' : 83,
          'rho_min[kg/m3]' : 1485, 'rho_max[kg/m3]': 1580,
          'Geo_H2O' : 9.3, 'Gen_H2O' : 8.5,
+         #Note a slight error is commited, sine 1 value was measured 4 times, other 20, etc,
+         #so both the mean and the error are slighlty wrong!
+         'MnO' : (.1+.09+.11+.11)/4, 'Delta_MnO' : (.11-.09)/2, 
+         'Fe2O3' : (4.76+4.53+4.58+4.79)/4, 'Delta_Fe2O3' : (4.79-4.53)/2,
+         'Na2O' : (2.05+2.01+2.21+2.14)/4, 'Delta_Na2O' : (2.21-2.01)/2, 
+         'MgO' : (1.98+2.12+1.89+2.04)/4, 'Delta_MgO' : (2.12-1.89)/2,
+         'Al2O3' : (19.23+19.52+19.44+19.31)/4, 'Delta_Al2O3' : (19.52-19.23)/2, 
+         'SiO2' : (66.62+66.76+66.3+66.12)/4, 'Delta_SiO2' : (66.76-66.12)/2,      
+         'P2O5' : (.02+.03+.04+.03)/4, 'Delta_P2O5' : (.04-.02)/2, 
+         'SO3' : (.06+.03+.04+.04)/4, 'Delta_SO3' : (.06-.03)/2, 
+         'Cl' : (.01+.01+0+.01)/4, 'Delta_Cl' : (.01-0)/2, 
+         'K2O' : (1.23+.94+1.29+1.35)/4, 'Delta_K2O' : (1.35-.94)/2, 
+         'CaO' : (3.52+3.56+3.69+3.64)/4, 'Delta_CaO' : (3.69-3.52)/2, 
+         'TiO2' : (.41+.41+.42+.43)/4, 'Delta_TiO2' : (.43-.41)/2, 
          }  #Turkish bentonite. The 200kg version, not small batches.
 
 Wyoming = {'name' : "Bara-Kade", '%Mont' : 85.3, 'Delta_%Mont' : 1.5, 
@@ -89,7 +117,14 @@ Wyoming = {'name' : "Bara-Kade", '%Mont' : 85.3, 'Delta_%Mont' : 1.5,
          'rho_grain[kg/m3]' :2769, 'Delta_rho_grain[kg/m3]' : 6,
          'rho_min[kg/m3]' : 1480, 'rho_max[kg/m3]': 1585,
          'Geo_H2O' : 11.4, 'Gen_H2O' : 10.2,
-         }  #Wyoming MX-80 bentonite. CEC_clay not measured.
+         #
+         'MnO' : .09, 'Delta_MnO' : .01, 'Fe2O3' : 7.37, 'Delta_Fe2O3' : .03,
+         'Na2O' : 1.12, 'Delta_Na2O' : .02, 'MgO' : 5.57, 'Delta_MgO' : .02,
+         'Al2O3' : 18.93, 'Delta_Al2O3' : .01, 'SiO2' : 62.66, 'Delta_SiO2' : .03,         
+         'P2O5' : .0, 'Delta_P2O5' : .00, 'SO3' : .37, 'Delta_SO3' : .02,
+         'Cl' : .0, 'Delta_Cl' : .00, 'K2O' : .61, 'Delta_K2O' : .0,
+         'CaO' : 1.52, 'Delta_CaO' : .06, 'TiO2' : .18, 'Delta_TiO2' : .0,
+         }  #Wyoming Bara Kade bentonite (not MX80, but similar). CEC_clay not measured.
 
 Sardinian = {'name' : "Sardinia", '%Mont' : 85.2, 'Delta_%Mont' : .14, 
          '%Mica' : 8, 'Delta_%Mica' : .42, 
@@ -102,6 +137,13 @@ Sardinian = {'name' : "Sardinia", '%Mont' : 85.2, 'Delta_%Mont' : .14,
          'rho_grain[kg/m3]' :2812, 'Delta_rho_grain[kg/m3]' : 10,
          'rho_min[kg/m3]' : 1430, 'rho_max[kg/m3]': 1510,
          'Geo_H2O' : 19.4, 'Gen_H2O' : 16.3,
+         #
+         'MnO' : .09, 'Delta_MnO' : .01, 'Fe2O3' : 7.37, 'Delta_Fe2O3' : .03,
+         'Na2O' : 5.57, 'Delta_Na2O' : .02, 'MgO' : 5.57, 'Delta_MgO' : .02,
+         'Al2O3' : 18.93, 'Delta_Al2O3' : .01, 'SiO2' : 62.66, 'Delta_SiO2' : .03,         
+         'P2O5' : .05, 'Delta_P2O5' : .00, 'SO3' : .04, 'Delta_SO3' : .0,
+         'Cl' : .05, 'Delta_Cl' : .00, 'K2O' : 1.58, 'Delta_K2O' : .01,
+         'CaO' : 1.8, 'Delta_CaO' : .01, 'TiO2' : .75, 'Delta_TiO2' : .0,
          }  #Sardinian bentonite. CEC_clay not measured.
 
 Indian = {'name' : "India", '%Mont' : 77.2, 'Delta_%Mont' : .71, 
@@ -115,6 +157,13 @@ Indian = {'name' : "India", '%Mont' : 77.2, 'Delta_%Mont' : .71,
          'rho_grain[kg/m3]' :2931, 'Delta_rho_grain[kg/m3]' : 19,
          'rho_min[kg/m3]' : 1420, 'rho_max[kg/m3]': 1540,
          'Geo_H2O' : 14.4, 'Gen_H2O' : 12.6,
+         #
+         'MnO' : .11, 'Delta_MnO' : .01, 'Fe2O3' : 21.13, 'Delta_Fe2O3' : .1,
+         'Na2O' : 1.58, 'Delta_Na2O' : .02, 'MgO' : 1.89, 'Delta_MgO' : .03,
+         'Al2O3' : 21.17, 'Delta_Al2O3' : .06, 'SiO2' : 48.55, 'Delta_SiO2' : .11,         
+         'P2O5' : .02, 'Delta_P2O5' : .00, 'SO3' : .63, 'Delta_SO3' : .02,
+         'Cl' : .68, 'Delta_Cl' : .05, 'K2O' : .13, 'Delta_K2O' : .0,
+         'CaO' : 1.26, 'Delta_CaO' : .03, 'TiO2' : 2.4, 'Delta_TiO2' : .03,
          }  #Indian bentonite. CEC_clay not measured.
 
 Bulgarian_1 = {'name' : "Bulgaria$_{20kg}$", '%Mont' : 73.8, 'Delta_%Mont' : 1.7, 
@@ -128,7 +177,14 @@ Bulgarian_1 = {'name' : "Bulgaria$_{20kg}$", '%Mont' : 73.8, 'Delta_%Mont' : 1.7
          'rho_grain[kg/m3]' :2757, 'Delta_rho_grain[kg/m3]' : 7,
          'rho_min[kg/m3]' : 1280, 'rho_max[kg/m3]': 1400,
          'Geo_H2O' : 20.1, 'Gen_H2O' : 16.7,
-          }  #Bulgarian bentonite, 20kg (2017). 
+         #
+         'MnO' : .061, 'Delta_MnO' : 0, 'Fe2O3' : 6.301, 'Delta_Fe2O3' : .0,
+         'Na2O' : .481, 'Delta_Na2O' : .0, 'MgO' : 3.581, 'Delta_MgO' : .0,
+         'Al2O3' : 16.974, 'Delta_Al2O3' : .0, 'SiO2' : 64.877, 'Delta_SiO2' : .0,         
+         'P2O5' : .182, 'Delta_P2O5' : .00, 'SO3' : .038, 'Delta_SO3' : .0,
+         'Cl' : .005, 'Delta_Cl' : .00, 'K2O' : 1.838, 'Delta_K2O' : .0,
+         'CaO' : 4.548, 'Delta_CaO' : .0, 'TiO2' : 1.113, 'Delta_TiO2' : .0,
+         }  #Bulgarian bentonite, 20kg (2017). 
 
 Bulgarian_2 = {'name' : "Bulgaria$_{20ton}$", '%Mont' : 82.6, 'Delta_%Mont' : .5, 
          '%Mica' : 6.3, 'Delta_%Mica' : .3, 
@@ -141,6 +197,13 @@ Bulgarian_2 = {'name' : "Bulgaria$_{20ton}$", '%Mont' : 82.6, 'Delta_%Mont' : .5
          'rho_grain[kg/m3]' :2770, 'Delta_rho_grain[kg/m3]' : 6,
          'rho_min[kg/m3]' : 0, 'rho_max[kg/m3]': 0,
          'Geo_H2O' : 19.6, 'Gen_H2O' : 16.4,
+         #Morocco data
+         'MnO' : .01, 'Delta_MnO' : 0, 'Fe2O3' : 2.71, 'Delta_Fe2O3' : .02,
+         'Na2O' : 1.42, 'Delta_Na2O' : .03, 'MgO' : 2.07, 'Delta_MgO' : .01,
+         'Al2O3' : 28.87, 'Delta_Al2O3' : .07, 'SiO2' : 61.82, 'Delta_SiO2' : .05,         
+         'P2O5' : .01, 'Delta_P2O5' : .00, 'SO3' : .07, 'Delta_SO3' : .0,
+         'Cl' : .12, 'Delta_Cl' : .00, 'K2O' : 1.08, 'Delta_K2O' : .02,
+         'CaO' : 1.53, 'Delta_CaO' : .03, 'TiO2' : .31, 'Delta_TiO2' : .0,
          }  #Bulgarian bentonite, 20 ton (2018).Data from grain infered from typing error
             #on report
 
@@ -155,8 +218,14 @@ Bulgarian_3 = {'name' : "Bulgaria$_F$", '%Mont' : 79.2, 'Delta_%Mont' : 1.7,
          'rho_grain[kg/m3]' :2758, 'Delta_rho_grain[kg/m3]' : 5,
          'rho_min[kg/m3]' : 1315, 'rho_max[kg/m3]': 1425,
          'Geo_H2O' : 18.8, 'Gen_H2O' : 15.9,
-           }  #Bulgarian bentonite, F. 
-
+                    #
+         'MnO' : .083, 'Delta_MnO' : 0, 'Fe2O3' : 2.71, 'Delta_Fe2O3' : .0,
+         'Na2O' : .651, 'Delta_Na2O' : .0, 'MgO' : 3.629, 'Delta_MgO' : .0,
+         'Al2O3' : 17.189, 'Delta_Al2O3' : .0, 'SiO2' : 64.222, 'Delta_SiO2' : .0,         
+         'P2O5' : .176, 'Delta_P2O5' : .00, 'SO3' : .064, 'Delta_SO3' : .0,
+         'Cl' : .003, 'Delta_Cl' : .00, 'K2O' : 1.502, 'Delta_K2O' : .0,
+         'CaO' : 5.016, 'Delta_CaO' : .0, 'TiO2' : 1.123, 'Delta_TiO2' : .0,
+         }
 
 #0 means not measured!!! 
 
