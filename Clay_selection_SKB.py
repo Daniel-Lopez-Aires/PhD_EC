@@ -109,7 +109,7 @@ Turkish = {'name' : "Turkey", '%Mont' : 72.43, 'Delta_%Mont' : 1.39,
 Wyoming = {'name' : "Bara-Kade", '%Mont' : 85.3, 'Delta_%Mont' : 1.5, 
          '%Mica' : 4.97, 'Delta_%Mica' : .74, 
          'CEC_total[cmol/kg]' : 84, 'Delta_CEC_total[cmol/kg]' : .6,
-         'CEC_clay[cmol/kg]' : 0, 'Delta_CEC_clay[cmol/kg]' : 0,
+         'CEC_clay[cmol/kg]' : 1e10, 'Delta_CEC_clay[cmol/kg]' : 0, #Instead of = in CEC clay I write 1e10!
          'EC[cmol/kg]' : 87.7 , 'Delta_EC[cmol/kg]': .3 ,
          'perc_C' : (.44 + .42 + .42)/3, 'Delta_perc_C':(.44 - .42)/2, 
          'perc_S' : (.21 + .21 + .21)/3, 'Delta_perc_S':(.21 - .21)/2, 
@@ -129,7 +129,7 @@ Wyoming = {'name' : "Bara-Kade", '%Mont' : 85.3, 'Delta_%Mont' : 1.5,
 Sardinian = {'name' : "Sardinia", '%Mont' : 85.2, 'Delta_%Mont' : .14, 
          '%Mica' : 8, 'Delta_%Mica' : .42, 
          'CEC_total[cmol/kg]' : 108.6, 'Delta_CEC_total[cmol/kg]' : 1.6,
-         'CEC_clay[cmol/kg]' : 0, 'Delta_CEC_clay[cmol/kg]' : 0,
+         'CEC_clay[cmol/kg]' : 1e10, 'Delta_CEC_clay[cmol/kg]' : 0,
          'EC[cmol/kg]' : 122.7 , 'Delta_EC[cmol/kg]': 2.1 ,
          'perc_C' : (.18 + .19 + .18)/3, 'Delta_perc_C':(.19 - .18)/2, 
          'perc_S' : (.03 + .03 + .03)/3, 'Delta_perc_S':(.03 - .03)/2, 
@@ -189,7 +189,7 @@ Bulgarian_1 = {'name' : "Bulgaria$_{20kg}$", '%Mont' : 73.8, 'Delta_%Mont' : 1.7
 Bulgarian_2 = {'name' : "Bulgaria$_{20ton}$", '%Mont' : 82.6, 'Delta_%Mont' : .5, 
          '%Mica' : 6.3, 'Delta_%Mica' : .3, 
          'CEC_total[cmol/kg]' : 79.4, 'Delta_CEC_total[cmol/kg]' : .4,
-         'CEC_clay[cmol/kg]' : 0, 'Delta_CEC_clay[cmol/kg]' : 0,
+         'CEC_clay[cmol/kg]' : 1e10, 'Delta_CEC_clay[cmol/kg]' : 0,
          'EC[cmol/kg]' : 0 , 'Delta_EC[cmol/kg]': 0 ,
          'perc_C' : (.58 + .86 + .59)/3, 'Delta_perc_C':(.86 - .58)/2, 
          'perc_S' : (.03 + .04 + .03)/3, 'Delta_perc_S':(.04 - .03)/2, 
@@ -294,7 +294,9 @@ rho_min = np.array([])              #Lower limit of rho [kg/m3]
 rho_max = np.array([])              #Upper limit of rho [kg/m3]
 Geo_H2O = np.array([])          #Water content, geological data (water/dry mass)
 Gen_H2O = np.array([])          #Water content, general data (water/total mass)
-
+#
+Mont_CEC = np.array([])     #Mont content stimation from CEC total/CEC clay
+Delta_Mont_CEC = np.array([])
 
 for i in range(0, len(Bentonites)):
     names = np.append(names, Bentonites[i]['name'])
@@ -346,7 +348,15 @@ for i in range(0, len(Bentonites)):
     Delta_CaO = np.append(Delta_CaO, Bentonites[i]['Delta_CaO'])
     TiO2 = np.append(TiO2, Bentonites[i]['TiO2'])
     Delta_TiO2 = np.append(Delta_TiO2, Bentonites[i]['Delta_TiO2'])
-        
+    #
+    Mont_CEC = np.append(Mont_CEC,  
+                         Bentonites[i]['CEC_total[cmol/kg]'] / Bentonites[i]['CEC_clay[cmol/kg]'])
+    Delta_Mont_CEC = np.append(Delta_Mont_CEC, 
+                               Bentonites[i]['CEC_total[cmol/kg]'] / Bentonites[i]['CEC_clay[cmol/kg]'] * np.sqrt(
+                             (Bentonites[i]['Delta_CEC_total[cmol/kg]'] / Bentonites[i]['CEC_total[cmol/kg]'])**2 + 
+                             (Bentonites[i]['Delta_CEC_clay[cmol/kg]'] /Bentonites[i]['CEC_clay[cmol/kg]'])**2) 
+                                )    
+    
 #%% ################################ 3) Data plotting #######################
 
 
@@ -398,6 +408,19 @@ plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True)
 plt.xticks(rotation=30) #rotation = 'vertical', 40 for 40 degress
 plt.savefig('Mont_content_vs_bentonite.png', format='png')
+
+### %mineral stimation from CEC
+#This gives higher values from the other stimation (XRD
+
+plt.figure(figsize=(10,8))  #width, heigh 6.4*4.8 inches by default
+plt.title("% Montmorillonite from CEC total/CEC clay", fontsize=22, wrap=True)           #title
+plt.bar(names, Mont_CEC*100, yerr = Delta_Mont_CEC, edgecolor="black") 
+plt.ylabel("% Montmorillonite [%]", fontsize=14)              #ylabel
+plt.xlabel('Bentonite', fontsize = 14)
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True)
+plt.xticks(rotation=30) #rotation = 'vertical', 40 for 40 degress
+plt.savefig('Mont_content_vs_bentonite_CEC.png', format='png')
 
 ### C and S content
 
