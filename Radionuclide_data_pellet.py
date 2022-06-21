@@ -13,6 +13,10 @@ Radionuclide inventory of the UO2 fuel pellet (Westinghouse)
 	Enrichment [%]	3.95	
 Molec mass	U [g/mol]	238.03	
 	UO2 [g/mol]	270.03	
+    
+We start from the ORIGEN code and then compute several derived magnitudes such as:
+    .Elemental content per g UO_2
+    .Isotopic abundance per chemical element
 """
 
 #%% ################################# 0) Package import######################
@@ -206,3 +210,89 @@ plt.yscale('log')                                          #y axis in log scale
 plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True) 
 plt.savefig('Elements_in_pellet.png', format='png')
+
+
+
+
+
+
+#%% ######## 4) Load BIC results ####################
+
+Data_BIC=pd.read_excel('Leachates_data_read_version.xlsx','Concentration(M) BIC-FULL')
+    #Data from the ORIGEN code
+    #Note the data from Te from 111days in filtered was wrong, so I set to 0!
+t_BIC = Data_BIC['T_run(d)'][0:10]       #[d] Experiment time
+Elements_ICPMS = Data_BIC['Element']    #Elements measured in ICPMS
+
+Data_YCWCa=pd.read_excel('Leachates_data_read_version.xlsx','Concentration(M) YCWCa-FULL')
+t_YCW = Data_YCWCa['T_run(d)'][0:11]       #[d] Experiment time
+#Those results can be plotted to be better understood
+
+
+
+#%%  ###### 5) plot results ########################
+
+#The simplest thing would be do one loop, and for each loop, plot. The loop will be
+#for each experiment time, both plots, filtered and non filtered.s
+
+
+##########BIC
+
+for i in range(len(t_BIC)):                     #Loop through all the experiments time
+    plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
+    plt.suptitle("Leachate experiments BIC, running time="+str(t_BIC[i])+'d', fontsize=22, wrap=True)           #title
+    #
+    plt.subplot(2, 1, 1)
+    plt.bar(Elements_ICPMS, Data_BIC['60FULL-F'+str(i+1)], edgecolor="black")     #like that u can iterate 
+    plt.title("Filtered leachant", fontsize=22)           #title
+    plt.xlabel("Element", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=16)              #ylabel
+    plt.yscale('log')                                          #y axis in log scale
+    # Set size of tick labels.
+    plt.tick_params(axis='both', labelsize=16)              #size of axis
+    plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.subplot(2, 1, 2)
+    plt.bar(Elements_ICPMS, Data_BIC['60FULL-NF'+str(i+1)], edgecolor="black")     #like that u can iterate 
+    plt.title("Non filtered leachant", fontsize=22)           #title
+    plt.xlabel("Element", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=16)              #ylabel
+    plt.yscale('log')                                          #y axis in log scale
+    plt.tick_params(axis='both', labelsize=16)              #size of axis
+    plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.savefig('BIC_t_run_'+str(i) +'.png', format='png')
+    
+
+
+############# YCWCa
+
+
+for i in range(len(t_YCW)):                     #Loop through all the experiments time
+    plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
+    plt.suptitle("Leachate experiments YCW, running time="+str(t_YCW[i])+'d', fontsize=22, wrap=True)           #title
+    #
+    plt.subplot(2, 1, 1)
+    plt.bar(Elements_ICPMS, Data_YCWCa['60 Si F-'+str(i+1)], edgecolor="black")     #like that u can iterate 
+    plt.title("Filtered leachant", fontsize=22)           #title
+    plt.xlabel("Element", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=16)              #ylabel
+    plt.yscale('log')                                          #y axis in log scale
+    # Set size of tick labels.
+    plt.tick_params(axis='both', labelsize=16)              #size of axis
+    plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.subplot(2, 1, 2)
+    plt.bar(Elements_ICPMS, Data_YCWCa['60 Si NF-'+str(i+1)], edgecolor="black")     #like that u can iterate 
+    plt.title("Non filtered leachant", fontsize=22)           #title
+    plt.xlabel("Element", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=16)              #ylabel
+    plt.yscale('log')                                          #y axis in log scale
+    plt.tick_params(axis='both', labelsize=16)              #size of axis
+    plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.savefig('YCW_t_run_'+str(i) +'.png', format='png')
