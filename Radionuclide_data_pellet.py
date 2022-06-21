@@ -216,13 +216,13 @@ plt.savefig('Elements_in_pellet.png', format='png')
 
 
 
-#%% ######## 4) Load BIC results ####################
+#%% ######## 4) Load leaching results ####################
 
 Data_BIC=pd.read_excel('Leachates_data_read_version.xlsx','Concentration(M) BIC-FULL')
     #Data from the ORIGEN code
     #Note the data from Te from 111days in filtered was wrong, so I set to 0!
 t_BIC = Data_BIC['T_run(d)'][0:10]       #[d] Experiment time
-Elements_ICPMS = Data_BIC['Element']    #Elements measured in ICPMS
+Elements_ICPMS = np.array(Data_BIC['Element'])    #Elements measured in ICPMS
 
 Data_YCWCa=pd.read_excel('Leachates_data_read_version.xlsx','Concentration(M) YCWCa-FULL')
 t_YCW = Data_YCWCa['T_run(d)'][0:11]       #[d] Experiment time
@@ -230,7 +230,7 @@ t_YCW = Data_YCWCa['T_run(d)'][0:11]       #[d] Experiment time
 
 
 
-#%%  ###### 5) plot results ########################
+#%%  ###### 5) plot leaching results ########################
 
 #The simplest thing would be do one loop, and for each loop, plot. The loop will be
 #for each experiment time, both plots, filtered and non filtered.s
@@ -296,3 +296,111 @@ for i in range(len(t_YCW)):                     #Loop through all the experiment
     plt.grid(True) 
     #
     plt.savefig('YCW_t_run_'+str(i) +'.png', format='png')
+    
+    
+    
+'''
+Anaylsis ########
+
+OVERAL:
+    .BIC have more elements with high concentrations than YCW
+
+######YCW
+We see the larger peaks,Rb, Cs, U, Mo, and as time goes by they increase and the
+surrounding elements also!
+
+##### BIC
+#Rb, Cs, U, Mo dominates, but other elements gets really similar, such as Sr, Cd, Ba
+
+
+'''
+
+
+#%% 6) plot of concentration of each element as a function of experiment time
+
+#Another really interesting thing to plot is the concentration in the leachate as a 
+#function of time, per each element. A lot of graphs, but we can make subplots and plot in 1 figure the 4
+#subplot of each element (filtered and non filt, BIC and YCW). To get the concentration from a pandas is not
+#difficult:
+
+#1st lets find the index per elements to automatize the process: lets find U index
+
+# a = np.where(Elements_ICPMS=='U')[0][0]         #THis gives the index where U is
+# conc_U_BIC= np.array(Data_BIC.iloc[np.where(Elements_ICPMS=='U')[0][0]])
+# conc_U_BIC = conc_U_BIC[2:]         #To remove the NaN (or time) and the element
+# #That contain all the U concentration, filtered and not filtered. To select one, provided
+# #that the order is 1st filter then NF we can do:
+
+# conc_U_BIC_F = conc_U_BIC[0:len(t_BIC)]
+
+
+
+#Now the automatization can start:
+    
+for i in range(len(Elements_ICPMS)):        #loop for each element
+    
+    #aux_1 = np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]         #THis gives the index where the
+        #desired element is
+    conc_BIC= np.array(Data_BIC.iloc[np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]]) #[M]Take concentrations
+        #for both filtered and non filtered
+    conc_BIC = conc_BIC[2:]         #[M] To remove the NaN (or time) and the element name
+    
+    #To get the filtered and non filtered data we can do:
+    conc_BIC_F = conc_BIC[0:len(t_BIC)]         #[M] filtered concentration
+    conc_BIC_NF = conc_BIC[len(t_BIC):]         #[M] non filtered concentration
+    
+    #We need to do essentially the same for YCWCa:
+    conc_YCW= np.array(Data_YCWCa.iloc[np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]]) #[M]Take concentrations
+        #for both filtered and non filtered
+    conc_YCW = conc_YCW[2:]         #[M] To remove the NaN (or time) and the element name
+    
+    #To get the filtered and non filtered data we can do:
+    conc_YCW_F = conc_YCW[0:len(t_YCW)]         #[M] filtered concentration
+    conc_YCW_NF = conc_YCW[len(t_YCW):]         #[M] non filtered concentration        
+    #
+    #And now we can plot the 4 of them per figure:
+     #   
+    plt.figure(figsize=(26,18))  #width, heigh 6.4*4.8 inches by default
+    plt.suptitle("Concentration in the leachant of"+Elements_ICPMS[i], fontsize=22, wrap=True)           #title
+    #
+    plt.subplot(2, 2, 1)
+    plt.plot( t_BIC, conc_BIC_F, 'bo--', linewidth=2)    
+    plt.title("Filtered leachant with BIC", fontsize=16)           #title
+    plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+    # Set size of tick labels.
+    plt.tick_params(axis='both', labelsize=14)              #size of axis
+    #plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.subplot(2, 2, 2)
+    plt.plot( t_BIC, conc_BIC_NF, 'bo--', linewidth=2)    
+    plt.title("Non filtered leachant with BIC", fontsize=16)           #title
+    plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+    # Set size of tick labels.
+    plt.tick_params(axis='both', labelsize=14)              #size of axis
+    #plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.subplot(2, 2, 3)
+    plt.plot( t_YCW, conc_YCW_F, 'ro--', linewidth=2)    
+    plt.title("Filtered leachant with YCW", fontsize=16)           #title
+    plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+    # Set size of tick labels.
+    plt.tick_params(axis='both', labelsize=14)              #size of axis
+    #plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.subplot(2, 2, 4)
+    plt.plot( t_YCW, conc_YCW_NF, 'ro--', linewidth=2)    
+    plt.title("Non filtered leachant with YCW", fontsize=16)           #title
+    plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+    plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+    # Set size of tick labels.
+    plt.tick_params(axis='both', labelsize=14)              #size of axis
+    #plt.ylim(1e-12,1e-4)                                     #limits of y axis
+    plt.grid(True) 
+    #
+    plt.savefig('Conc'+Elements_ICPMS[i] +'.png', format='png')
