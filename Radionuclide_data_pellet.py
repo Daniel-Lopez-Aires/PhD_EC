@@ -320,8 +320,8 @@ surrounding elements also!
 
 #Another really interesting thing to plot is the concentration in the leachate as a 
 #function of time, per each element. A lot of graphs, but we can make subplots and plot in 1 figure the 4
-#subplot of each element (filtered and non filt, BIC and YCW). To get the concentration from a pandas is not
-#difficult:
+#subplot of each element (filtered and non filt, BIC and YCW). To get the concentration from a 
+#pandas is not difficult:
 
 #1st lets find the index per elements to automatize the process: lets find U index
 
@@ -335,14 +335,14 @@ surrounding elements also!
 
 
 
-#Now the automatization can start:
+#Now the automatization of that thing (commented now) can start:
     
 for i in range(len(Elements_ICPMS)):        #loop for each element
     
-    #aux_1 = np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]         #THis gives the index where the
+    #aux_1 = np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]    #THis gives the index where the
         #desired element is
-    conc_BIC= np.array(Data_BIC.iloc[np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]]) #[M]Take concentrations
-        #for both filtered and non filtered
+    conc_BIC= np.array(Data_BIC.iloc[np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]]) 
+                                #[M]Take concentrations for both filtered and non filtered
     conc_BIC = conc_BIC[2:]         #[M] To remove the NaN (or time) and the element name
     
     #To get the filtered and non filtered data we can do:
@@ -350,8 +350,8 @@ for i in range(len(Elements_ICPMS)):        #loop for each element
     conc_BIC_NF = conc_BIC[len(t_BIC):]         #[M] non filtered concentration
     
     #We need to do essentially the same for YCWCa:
-    conc_YCW= np.array(Data_YCWCa.iloc[np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]]) #[M]Take concentrations
-        #for both filtered and non filtered
+    conc_YCW= np.array(Data_YCWCa.iloc[np.where(Elements_ICPMS == Elements_ICPMS[i])[0][0]]) 
+                    #[M]Take concentrations for both filtered and non filtered
     conc_YCW = conc_YCW[2:]         #[M] To remove the NaN (or time) and the element name
     
     #To get the filtered and non filtered data we can do:
@@ -360,47 +360,45 @@ for i in range(len(Elements_ICPMS)):        #loop for each element
     #
     #And now we can plot the 4 of them per figure:
      #   
-    plt.figure(figsize=(26,18))  #width, heigh 6.4*4.8 inches by default
-    plt.suptitle("Concentration in the leachant of"+Elements_ICPMS[i], fontsize=22, wrap=True)           #title
+    plt.figure(figsize=(15,8))  #width, heigh 6.4*4.8 inches by default
+    plt.suptitle("Concentration in the leachant of "+Elements_ICPMS[i], fontsize=22, wrap=True)           
+                #title
     #
-    plt.subplot(2, 2, 1)
-    plt.plot( t_BIC, conc_BIC_F, 'bo--', linewidth=2)    
-    plt.title("Filtered leachant with BIC", fontsize=16)           #title
+    plt.subplot(1, 2, 1)
+    plt.plot( t_BIC, conc_BIC_F, 'bo--', linewidth=2, label= 'Filtered' )    
+    plt.plot( t_BIC, conc_BIC_NF, 'ro--', linewidth=2, label = 'Non filtered')    
+    plt.title("Leachant with BIC", fontsize=16)           #title
     plt.xlabel("Time [d]", fontsize=14)                        #xlabel
     plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
     # Set size of tick labels.
     plt.tick_params(axis='both', labelsize=14)              #size of axis
     #plt.ylim(1e-12,1e-4)                                     #limits of y axis
     plt.grid(True) 
+    plt.legend()
     #
-    plt.subplot(2, 2, 2)
-    plt.plot( t_BIC, conc_BIC_NF, 'bo--', linewidth=2)    
-    plt.title("Non filtered leachant with BIC", fontsize=16)           #title
+    plt.subplot(1, 2, 2)
+    plt.plot( t_YCW, conc_YCW_F, 'bo--', linewidth=2, label= 'Filtered' )    
+    plt.plot( t_YCW, conc_YCW_NF, 'ro--', linewidth=2, label = 'Non filtered')      
+    plt.title("Leachant with YCW", fontsize=16)           #title
     plt.xlabel("Time [d]", fontsize=14)                        #xlabel
     plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
     # Set size of tick labels.
     plt.tick_params(axis='both', labelsize=14)              #size of axis
     #plt.ylim(1e-12,1e-4)                                     #limits of y axis
     plt.grid(True) 
+    plt.legend()
     #
-    plt.subplot(2, 2, 3)
-    plt.plot( t_YCW, conc_YCW_F, 'ro--', linewidth=2)    
-    plt.title("Filtered leachant with YCW", fontsize=16)           #title
-    plt.xlabel("Time [d]", fontsize=14)                        #xlabel
-    plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
-    # Set size of tick labels.
-    plt.tick_params(axis='both', labelsize=14)              #size of axis
-    #plt.ylim(1e-12,1e-4)                                     #limits of y axis
-    plt.grid(True) 
     #
-    plt.subplot(2, 2, 4)
-    plt.plot( t_YCW, conc_YCW_NF, 'ro--', linewidth=2)    
-    plt.title("Non filtered leachant with YCW", fontsize=16)           #title
-    plt.xlabel("Time [d]", fontsize=14)                        #xlabel
-    plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
-    # Set size of tick labels.
-    plt.tick_params(axis='both', labelsize=14)              #size of axis
-    #plt.ylim(1e-12,1e-4)                                     #limits of y axis
-    plt.grid(True) 
-    #
-    plt.savefig('Conc'+Elements_ICPMS[i] +'.png', format='png')
+    plt.savefig('Concentration_'+Elements_ICPMS[i] +'_in_leach.png', format='png')
+    
+    
+    
+    
+'''Analysis
+
+.Wow, each element has apparently a different trend ==> :))
+.Most of the elements dissolve more in BIC,but not all!
+.Note than precipitation can occur once the concentration is too high (saturate), which
+could explain some o the graphs, since its common to see initial increase and then decrease
+
+'''
