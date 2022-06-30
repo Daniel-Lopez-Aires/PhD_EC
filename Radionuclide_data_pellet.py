@@ -420,15 +420,28 @@ could explain some o the graphs, since its common to see initial increase and th
 
 #################BIC
 
+    
+    
 
 ##### F
     
 plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
-for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+for i in range(10):     #Loop through first 10 elements
     
     plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[i][2:12], 'o--', linewidth=2, label= Elements_ICPMS[i] )
         #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(10):     #Loop through second 10 elements
     
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[10+i][2:12], 'o-.', linewidth=2, label= Elements_ICPMS[10+i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(5):     #Loop through the reamining 5 elements of eleements ICPMS
+    
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[20+i][2:12], 'o:', linewidth=2, label= Elements_ICPMS[20+i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+    
+        
 # plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
 # plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
 # plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
@@ -454,21 +467,21 @@ plt.savefig('Concentration_all_BIC_F.png', format='png', bbox_inches='tight')
 
 
 plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
-for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+for i in range(10):     #Loop through first 10 elements
     
-    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[i][12:], 'o--', linewidth=2, label= Elements_ICPMS[i] ) 
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[i][12:], 'o--', linewidth=2, label= Elements_ICPMS[i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(10):     #Loop through second 10 elements
+    
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[10+i][12:], 'o-.', linewidth=2, label= Elements_ICPMS[10+i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(5):     #Loop through the reamining 5 elements of eleements ICPMS
+    
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[20+i][12:], 'o:', linewidth=2, label= Elements_ICPMS[20+i] )
         #[2:12] to cover all the values of the F (0 is the time, 1 is element)
     
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-
 plt.title("Concentration of every element for the non-filtered case in BIC", fontsize=20)           #title
 plt.xlabel("Time [d]", fontsize=14)                        #xlabel
 plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
@@ -488,21 +501,21 @@ plt.savefig('Concentration_all_BIC_NF.png', format='png', bbox_inches='tight')
 ##### F
     
 plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
-for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+for i in range(10):     #Loop through first 10 elements
     
-    plt.plot(Data_YCWCa['T_run(d)'][0:11],Data_YCWCa.iloc[i][2:13], 'o--', linewidth=2, label= Elements_ICPMS[i] ) 
+    plt.plot(Data_BIC['T_run(d)'][0:11],Data_YCWCa.iloc[i][2:13], 'o--', linewidth=2, label= Elements_ICPMS[i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(10):     #Loop through second 10 elements
+    
+    plt.plot(Data_BIC['T_run(d)'][0:11],Data_YCWCa.iloc[10+i][2:13], 'o-.', linewidth=2, label= Elements_ICPMS[10+i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(5):     #Loop through the reamining 5 elements of eleements ICPMS
+    
+    plt.plot(Data_BIC['T_run(d)'][0:11],Data_YCWCa.iloc[20+i][2:13], 'o:', linewidth=2, label= Elements_ICPMS[20+i] )
         #[2:12] to cover all the values of the F (0 is the time, 1 is element)
     
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-
 plt.title("Concentration of every element for the filtered case in YCWCa", fontsize=20)           #title
 plt.xlabel("Time [d]", fontsize=14)                        #xlabel
 plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
@@ -518,21 +531,21 @@ plt.savefig('Concentration_all_YCWCa_F.png', format='png', bbox_inches='tight')
 ##### NF
     
 plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
-for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+for i in range(10):     #Loop through first 10 elements
     
-    plt.plot(Data_YCWCa['T_run(d)'][0:11],Data_YCWCa.iloc[i][13:], 'o--', linewidth=2, label= Elements_ICPMS[i] ) 
+    plt.plot(Data_BIC['T_run(d)'][0:11],Data_YCWCa.iloc[i][13:], 'o--', linewidth=2, label= Elements_ICPMS[i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(10):     #Loop through second 10 elements
+    
+    plt.plot(Data_BIC['T_run(d)'][0:11],Data_YCWCa.iloc[10+i][13:], 'o-.', linewidth=2, label= Elements_ICPMS[10+i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+
+for i in range(5):     #Loop through the reamining 5 elements of eleements ICPMS
+    
+    plt.plot(Data_BIC['T_run(d)'][0:11],Data_YCWCa.iloc[20+i][13:], 'o:', linewidth=2, label= Elements_ICPMS[20+i] )
         #[2:12] to cover all the values of the F (0 is the time, 1 is element)
     
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
-
 plt.title("Concentration of every element for the nono-filtered case in YCWCa", fontsize=20)           #title
 plt.xlabel("Time [d]", fontsize=14)                        #xlabel
 plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
