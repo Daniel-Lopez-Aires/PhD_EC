@@ -209,7 +209,8 @@ plt.yscale('log')                                          #y axis in log scale
 # Set size of tick labels.
 plt.tick_params(axis='both', labelsize=14)              #size of axis
 plt.grid(True) 
-plt.savefig('Elements_in_pellet.png', format='png')
+plt.savefig('Elements_in_pellet.png', format='png', bbox_inches='tight') 
+        #The bbox_inches is to save the figure with less blank space!!
 
 
 
@@ -263,7 +264,7 @@ for i in range(len(t_BIC)):                     #Loop through all the experiment
     plt.ylim(1e-12,1e-4)                                     #limits of y axis
     plt.grid(True) 
     #
-    plt.savefig('BIC_t_run_'+str(i) +'.png', format='png')
+    plt.savefig('BIC_t_run_'+str(i) +'.png', format='png', bbox_inches='tight') 
     
 
 
@@ -295,7 +296,7 @@ for i in range(len(t_YCW)):                     #Loop through all the experiment
     plt.ylim(1e-12,1e-4)                                     #limits of y axis
     plt.grid(True) 
     #
-    plt.savefig('YCW_t_run_'+str(i) +'.png', format='png')
+    plt.savefig('YCW_t_run_'+str(i) +'.png', format='png', bbox_inches='tight') 
     
     
     
@@ -304,13 +305,17 @@ Anaylsis ########
 
 OVERAL:
     .BIC have more elements with high concentrations than YCW
+    . Pm is the element that dissolve less always, anytime ==> Hard to find
+  
 
 ######YCW
-We see the larger peaks,Rb, Cs, U, Mo, and as time goes by they increase and the
+.We see the larger peaks,Rb, Cs, U, Mo, and as time goes by they increase and the
 surrounding elements also!
+.Element that dissolve most: Cs and then Mo surpass it
 
 ##### BIC
 #Rb, Cs, U, Mo dominates, but other elements gets really similar, such as Sr, Cd, Ba
+ELement that dissolve most: Cs, and then U surpass it
 
 
 '''
@@ -389,7 +394,7 @@ for i in range(len(Elements_ICPMS)):        #loop for each element
     plt.legend()
     #
     #
-    plt.savefig('Concentration_'+Elements_ICPMS[i] +'_in_leach.png', format='png')
+    plt.savefig('Concentration_'+Elements_ICPMS[i] +'_in_leach.png', format='png', bbox_inches='tight') 
     
     
     
@@ -401,4 +406,147 @@ for i in range(len(Elements_ICPMS)):        #loop for each element
 .Note than precipitation can occur once the concentration is too high (saturate), which
 could explain some o the graphs, since its common to see initial increase and then decrease
 
+'''
+
+
+#To understand it better, maybe we can plot the time variation of concentration of all
+#elements? lets try. For this we need to plot columns. We will use a loop lop to avoid
+#writting a lot of times the same plot xD. But, the plot is not that good because
+#there are 10 different colors, so since we have 25 elements, they start repeating, which
+#is bad for the interpretation, so should create 3 different line patters to help
+#distinguish it. How can we do that? the simplest is 3 loops, 1 of 10, then other 10, then
+#the reamining 5 :)
+
+
+#################BIC
+
+
+##### F
+    
+plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
+for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+    
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[i][2:12], 'o--', linewidth=2, label= Elements_ICPMS[i] )
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+    
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+
+plt.title("Concentration of every element for the filtered case in BIC", fontsize=20)           #title
+plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+plt.yscale('log')                                          #y axis in log scale
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+plt.legend()
+plt.ylim(1e-14,1e-4)                                     #limits of y axis
+plt.savefig('Concentration_all_BIC_F.png', format='png', bbox_inches='tight')    
+
+
+##### NF
+
+
+plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
+for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+    
+    plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[i][12:], 'o--', linewidth=2, label= Elements_ICPMS[i] ) 
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+    
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+
+plt.title("Concentration of every element for the non-filtered case in BIC", fontsize=20)           #title
+plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+plt.yscale('log')                                          #y axis in log scale
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+plt.legend()
+plt.ylim(1e-14,1e-4)                                     #limits of y axis
+plt.savefig('Concentration_all_BIC_NF.png', format='png', bbox_inches='tight')      
+
+
+
+#################YCWCa
+
+
+##### F
+    
+plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
+for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+    
+    plt.plot(Data_YCWCa['T_run(d)'][0:11],Data_YCWCa.iloc[i][2:13], 'o--', linewidth=2, label= Elements_ICPMS[i] ) 
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+    
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+
+plt.title("Concentration of every element for the filtered case in YCWCa", fontsize=20)           #title
+plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+plt.yscale('log')                                          #y axis in log scale
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+plt.legend()
+plt.ylim(1e-14,1e-4)                                     #limits of y axis
+plt.savefig('Concentration_all_YCWCa_F.png', format='png', bbox_inches='tight')     
+
+
+##### NF
+    
+plt.figure(figsize=(24,16))  #width, heigh 6.4*4.8 inches by default
+for i in range(len(Elements_ICPMS)):     #Loop through all the measured element to plot them
+    
+    plt.plot(Data_YCWCa['T_run(d)'][0:11],Data_YCWCa.iloc[i][13:], 'o--', linewidth=2, label= Elements_ICPMS[i] ) 
+        #[2:12] to cover all the values of the F (0 is the time, 1 is element)
+    
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Sr' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Y' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+# plt.plot(Data_BIC['T_run(d)'][0:10],Data_BIC.iloc[0][0:10], 'bo--', linewidth=2, label= 'Rb' ) 
+
+plt.title("Concentration of every element for the nono-filtered case in YCWCa", fontsize=20)           #title
+plt.xlabel("Time [d]", fontsize=14)                        #xlabel
+plt.ylabel("Concentration [M]", fontsize=14)              #ylabel
+plt.yscale('log')                                          #y axis in log scale
+# Set size of tick labels.
+plt.tick_params(axis='both', labelsize=14)              #size of axis
+plt.grid(True) 
+plt.ylim(1e-14,1e-4)                                     #limits of y axis
+plt.legend()
+plt.savefig('Concentration_all_YCWCa_NF.png', format='png', bbox_inches='tight')    
+
+
+''''
+Note we omit somethings, the scale to show everything is -4 to -27M! But those exremely
+low values I have no clue why they are there. TO ask steff, but to -15M we see the bigger
+picture
 '''
